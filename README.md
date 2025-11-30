@@ -1,7 +1,6 @@
 # Magento 2 Backend Developer - Advanced Level Study Plan
 ## Path to Adobe Certified Professional Developer
 
-Based on DevBigBoy's repositories: https://github.com/DevBigBoy
 
 ---
 
