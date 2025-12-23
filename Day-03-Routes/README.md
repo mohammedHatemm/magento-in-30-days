@@ -467,4 +467,4 @@ class CustomRouter implements RouterInterface
 
 ---
 
-## ⬅️ [Previous](./02_MODULE_XML.md) | [🏠 Home](../MODULE_STRUCTURE_EN.md) | [Next ➡️](./04_CONTROLLERS.md)
+## ⬅️ [Previous](./Day-02-Module-XML/README.md) | [🏠 Home](../README.md) | [Next ➡️](./Day-04-Controllers/README.md)

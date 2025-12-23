@@ -134,7 +134,7 @@ class Index implements HttpGetActionInterface
 
     public function execute(): Page
     {
-        $id = $this->request->getParam('id');
+            $id = $this->request->getParam('id');
 
         $page = $this->pageFactory->create();
         $page->getConfig()->getTitle()->set(__('My Page Title'));
@@ -502,4 +502,4 @@ class GetEntity implements HttpGetActionInterface
 
 ---
 
-## ⬅️ [Previous](./03_ROUTES.md) | [🏠 Home](../MODULE_STRUCTURE_EN.md) | [Next ➡️](./05_MODELS.md)
+## ⬅️ [Previous](./Day-03-Routes/README.md) | [🏠 Home](../README.md) | [Next ➡️](./Day-05-Models/README.md)

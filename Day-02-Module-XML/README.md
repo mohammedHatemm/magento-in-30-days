@@ -509,4 +509,4 @@ bin/magento module:status --disabled
 
 ---
 
-## ⬅️ [Previous](./01_REGISTRATION.md) | [🏠 Home](../MODULE_STRUCTURE_EN.md) | [Next ➡️](./03_ROUTES.md)
+## ⬅️ [Previous](./Day-01-Registration/README.md) | [🏠 Home](../README.md) | [Next ➡️](./Day-03-ROUTES/README.md)

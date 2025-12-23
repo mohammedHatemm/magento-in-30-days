@@ -522,4 +522,4 @@ class MyClass
 
 ---
 
-## ➡️ [Next: module.xml](./02_MODULE_XML.md) | [🏠 Home](../MODULE_STRUCTURE_EN.md)
+## ➡️ [Next: module.xml](./Day-02-Module-XML/README.md) | [🏠 Home](../README.md)
