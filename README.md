@@ -91,46 +91,46 @@ ComponentRegistrar::register(
 
 | Day | Topic | Link |
 |-----|-------|------|
-| 01 | Registration | [📂 Go →](./docs/Day-01-Registration/) |
-| 02 | Module XML | [📂 Go →](./docs/Day-02-Module-XML/) |
-| 03 | Routes | [📂 Go →](./docs/Day-03-Routes/) |
-| 04 | Controllers | [📂 Go →](./docs/Day-04-Controllers/) |
-| 05 | Models | [📂 Go →](./docs/Day-05-Models/) |
-| 06 | Blocks | [📂 Go →](./docs/Day-06-Blocks/) |
-| 07 | Views & Layouts | [📂 Go →](./docs/Day-07-Views-Layouts/) |
-| 08 | Dependency Injection | [📂 Go →](./docs/Day-08-Dependency-Injection/) |
-| 09 | Observers | [📂 Go →](./docs/Day-09-Observers/) |
-| 10 | Plugins | [📂 Go →](./docs/Day-10-Plugins/) |
-| 11 | API & WebAPI | [📂 Go →](./docs/Day-11-API-WebAPI/) |
-| 12 | Setup & Patches | [📂 Go →](./docs/Day-12-Setup-Patches/) |
-| 13 | CLI Commands | [📂 Go →](./docs/Day-13-CLI-Commands/) |
-| 14 | Cron Jobs | [📂 Go →](./docs/Day-14-Cron-Jobs/) |
+| 01 | Registration | [📂 Go →](./Day-01-Registration/README.md) |
+| 02 | Module XML | [📂 Go →](./Day-02-Module-XML/README.md) |
+| 03 | Routes | [📂 Go →](./Day-03-Routes/README.md) |
+| 04 | Controllers | [📂 Go →](./Day-04-Controllers/README.md) |
+| 05 | Models | [📂 Go →](./Day-05-Models/README.md) |
+| 06 | Blocks | [📂 Go →](./Day-06-Blocks/README.md) |
+| 07 | Views & Layouts | [📂 Go →](./Day-07-Views-Layouts/README.md) |
+| 08 | Dependency Injection | [📂 Go →](./Day-08-Dependency-Injection/README.md) |
+| 09 | Observers | [📂 Go →](./Day-09-Observers/README.md) |
+| 10 | Plugins | [📂 Go →](./Day-10-Plugins/README.md) |
+| 11 | API & WebAPI | [📂 Go →](./Day-11-API-WebAPI/README.md) |
+| 12 | Setup & Patches | [📂 Go →](./Day-12-Setup-Patches/README.md) |
+| 13 | CLI Commands | [📂 Go →](./Day-13-CLI-Commands/README.md) |
+| 14 | Cron Jobs | [📂 Go →](./Day-14-Cron-Jobs/README.md) |
 
 ### Advanced Topics (Days 15-26)
 
 | Day | Topic | Link |
 |-----|-------|------|
-| 15 | EAV System | [📂 Go →](./docs/Day-15-EAV-System/) |
-| 16 | XML Configuration | [📂 Go →](./docs/Day-16-XML-Configuration/) |
-| 17 | UI Components | [📂 Go →](./docs/Day-17-UI-Components/) |
-| 18 | Indexers | [📂 Go →](./docs/Day-18-Indexers/) |
-| 19 | Caching | [📂 Go →](./docs/Day-19-Caching/) |
-| 20 | ACL & Security | [📂 Go →](./docs/Day-20-ACL-Security/) |
-| 21 | Testing | [📂 Go →](./docs/Day-21-Testing/) |
-| 22 | GraphQL | [📂 Go →](./docs/Day-22-GraphQL/) |
-| 23 | Message Queues | [📂 Go →](./docs/Day-23-Message-Queues/) |
-| 24 | Payment Methods | [📂 Go →](./docs/Day-24-Payment-Methods/) |
-| 25 | Checkout | [📂 Go →](./docs/Day-25-Checkout/) |
-| 26 | Themes | [📂 Go →](./docs/Day-26-Themes/) |
+| 15 | EAV System | [📂 Go →](./Day-15-EAV-System/README.md) |
+| 16 | XML Configuration | [📂 Go →](./Day-16-XML-Configuration/README.md) |
+| 17 | UI Components | [📂 Go →](./Day-17-UI-Components/README.md) |
+| 18 | Indexers | [📂 Go →](./Day-18-Indexers/README.md) |
+| 19 | Caching | [📂 Go →](./Day-19-Caching/README.md) |
+| 20 | ACL & Security | [📂 Go →](./Day-20-ACL-Security/README.md) |
+| 21 | Testing | [📂 Go →](./Day-21-Testing/README.md) |
+| 22 | GraphQL | [📂 Go →](./Day-22-GraphQL/README.md) |
+| 23 | Message Queues | [📂 Go →](./Day-23-Message-Queues/README.md) |
+| 24 | Payment Methods | [📂 Go →](./Day-24-Payment-Methods/README.md) |
+| 25 | Checkout | [📂 Go →](./Day-25-Checkout/README.md) |
+| 26 | Themes | [📂 Go →](./Day-26-Themes/README.md) |
 
 ### Practical Topics (Days 27-30)
 
 | Day | Topic | Link |
 |-----|-------|------|
-| 27 | Admin Grids | [📂 Go →](./docs/Day-27-Admin-Grids/) |
-| 28 | Admin Forms | [📂 Go →](./docs/Day-28-Admin-Forms/) |
-| 29 | JavaScript & RequireJS | [📂 Go →](./docs/Day-29-JavaScript-RequireJS/) |
-| 30 | Final Project | [📂 Go →](./docs/Day-30-Final-Project/) |
+| 27 | Admin Grids | [📂 Go →](./Day-27-Admin-Grids/README.md) |
+| 28 | Admin Forms | [📂 Go →](./Day-28-Admin-Forms/README.md) |
+| 29 | JavaScript & RequireJS | [📂 Go →](./Day-29-JavaScript-RequireJS/README.md) |
+| 30 | Final Project | [📂 Go →](./Day-30-Final-Project/README.md) |
 
 ---
 
