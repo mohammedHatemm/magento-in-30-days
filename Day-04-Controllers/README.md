@@ -26,6 +26,7 @@
 ### What is a Controller?
 
 A Controller is responsible for:
+
 - **Receiving** the HTTP Request
 - **Processing** the request (via Models/Services)
 - **Returning** an appropriate Response
@@ -66,7 +67,7 @@ app/code/Vendor/ModuleName/Controller/
 ### Naming Conventions
 
 ```
-URL: /{frontName}/{controller}/{action}
+URL: /{frontName -> in module.xml}/{controller folder}/{action name}
 
 Controller Path: Controller/{Controller}/{Action}.php
 
@@ -82,12 +83,12 @@ Class: Vendor\Module\Controller\Customer\View
 
 ### Available Interfaces
 
-| Interface | HTTP Method | Usage |
-|-----------|-------------|-------|
-| `HttpGetActionInterface` | GET | Display pages, read data |
-| `HttpPostActionInterface` | POST | Submit forms, create data |
-| `HttpPutActionInterface` | PUT | Update data |
-| `HttpDeleteActionInterface` | DELETE | Delete data |
+| Interface                   | HTTP Method | Usage                     |
+| --------------------------- | ----------- | ------------------------- |
+| `HttpGetActionInterface`    | GET         | Display pages, read data  |
+| `HttpPostActionInterface`   | POST        | Submit forms, create data |
+| `HttpPutActionInterface`    | PUT         | Update data               |
+| `HttpDeleteActionInterface` | DELETE      | Delete data               |
 
 ### Interface Locations
 
@@ -283,13 +284,13 @@ class MyController
 
 ### Available Types
 
-| Type | Usage | Factory |
-|------|-------|---------|
-| `Page` | HTML page | `PageFactory` |
-| `Json` | JSON response | `JsonFactory` |
-| `Redirect` | Redirect URL | `RedirectFactory` |
-| `Forward` | Internal forward | `ForwardFactory` |
-| `Raw` | Raw content | `RawFactory` |
+| Type       | Usage            | Factory           |
+| ---------- | ---------------- | ----------------- |
+| `Page`     | HTML page        | `PageFactory`     |
+| `Json`     | JSON response    | `JsonFactory`     |
+| `Redirect` | Redirect URL     | `RedirectFactory` |
+| `Forward`  | Internal forward | `ForwardFactory`  |
+| `Raw`      | Raw content      | `RawFactory`      |
 
 ### Page Result
 
@@ -354,12 +355,12 @@ public function execute()
 
 ### Difference
 
-| Property | Forward | Redirect |
-|----------|---------|----------|
-| New HTTP Request | ❌ No | ✅ Yes |
-| URL Changes | ❌ No | ✅ Yes |
-| Data Preserved | ✅ Yes | ❌ No |
-| Performance | Faster | Slower |
+| Property         | Forward | Redirect |
+| ---------------- | ------- | -------- |
+| New HTTP Request | ❌ No   | ✅ Yes   |
+| URL Changes      | ❌ No   | ✅ Yes   |
+| Data Preserved   | ✅ Yes  | ❌ No    |
+| Performance      | Faster  | Slower   |
 
 ---
 
@@ -492,13 +493,13 @@ class GetEntity implements HttpGetActionInterface
 
 ## 📌 Summary
 
-| Item | Value |
-|------|-------|
-| **Path** | `Controller/` (Frontend) or `Controller/Adminhtml/` (Admin) |
-| **Interfaces** | `HttpGetActionInterface`, `HttpPostActionInterface` |
-| **Admin Base** | `Magento\Backend\App\Action` |
-| **Method** | `execute()` |
-| **ACL** | `ADMIN_RESOURCE` constant |
+| Item           | Value                                                       |
+| -------------- | ----------------------------------------------------------- |
+| **Path**       | `Controller/` (Frontend) or `Controller/Adminhtml/` (Admin) |
+| **Interfaces** | `HttpGetActionInterface`, `HttpPostActionInterface`         |
+| **Admin Base** | `Magento\Backend\App\Action`                                |
+| **Method**     | `execute()`                                                 |
+| **ACL**        | `ADMIN_RESOURCE` constant                                   |
 
 ---
 
