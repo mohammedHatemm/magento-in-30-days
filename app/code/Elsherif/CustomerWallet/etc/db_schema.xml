@@ -1,0 +1,77 @@
+<?xml version="1.0"  ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="elsherif_wallet" resource="default" engine="innodb" comment="Customer Wallet">
+        <column xsi:type="int"
+                name="wallet_id"
+                unsigned="true"
+                nullable="false"
+                identity="true"
+                comment="Wallet Id"/>
+        <column xsi:type="int"
+                name="customer_id"
+                unsigned="true"
+                nullable="false"
+                comment="Customer Id"/>
+
+        <column xsi:type="decimal"
+                name="balance"
+                percition="20"
+                scale="4"
+                default="0.0000"
+                nullable="false"
+                comment="Current Balance"/>
+        <column xsi:type="smallint"
+                name="status"
+                unsigned="true"
+                nullable="false"
+                default="1"
+                comment="Status: 1=Active, 0=Disabled"/>
+        <column xsi:type="varchar"
+                name="currency_code"
+                length="3"
+                nullable="false"
+                default="EGP"
+                comment="Currency Code"/>
+        <column xsi:type="timestamp"
+                name="created_at"
+                on_update="false"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                comment="Created_At"/>
+        <column xsi:type="timestamp"
+                name="updated_at"
+                on_update="true"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                comment="Updated_At"/>
+
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="wallet_id"/>
+        </constraint>
+
+        <constraint xsi:type="unique" referenceId="ELSHERIF_WALLET_CUSTOMER_ID_UNIQUE">
+            <column name="customer_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="ELSHERIF_WALLET_CUSTOMER_ID_CUSTOMER_ENTITY_ID"
+                    table="elsherif_wallet"
+                    column="customer_id"
+                    referenceTable="customer_entity"
+                    referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+
+        <index referenceId="ELSHERIF_WALLET_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+
+        <index referenceId="ELSHERIF_WALLET_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+
+
+    </table>
+
+</schema>
