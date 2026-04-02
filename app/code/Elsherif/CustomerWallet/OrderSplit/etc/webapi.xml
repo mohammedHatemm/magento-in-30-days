@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+    REST API Webhook Endpoints:
+    POST /rest/V1/ordersplit/webhook/amendment   - ERPNext SO amendment
+    POST /rest/V1/ordersplit/webhook/cancel      - ERPNext SO cancellation
+    POST /rest/V1/ordersplit/webhook/delivery    - ERPNext Delivery Note
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/ordersplit/webhook/amendment" method="POST">
+        <service class="CrocoIT\OrderSplit\Api\WebhookInterface" method="processAmendment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/ordersplit/webhook/cancel" method="POST">
+        <service class="CrocoIT\OrderSplit\Api\WebhookInterface" method="processCancellation"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/ordersplit/webhook/delivery" method="POST">
+        <service class="CrocoIT\OrderSplit\Api\WebhookInterface" method="processDeliveryNote"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+</routes>

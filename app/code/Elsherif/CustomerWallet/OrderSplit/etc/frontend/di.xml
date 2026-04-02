@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/di.xsd">
+
+    <!-- Hide child orders from customer's My Orders page -->
+    <type name="Magento\Sales\Model\ResourceModel\Order\Collection">
+        <plugin name="crocoit_ordersplit_hide_child_orders_frontend"
+                type="CrocoIT\OrderSplit\Plugin\Order\HideChildOrdersPlugin"/>
+    </type>
+
+</config>

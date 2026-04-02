@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <order_split>
+            <general>
+                <enabled>1</enabled>
+                <split_single_warehouse>1</split_single_warehouse>
+                <debug_mode>0</debug_mode>
+            </general>
+        </order_split>
+    </default>
+</config>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+
+        <column name="is_parent"
+                class="CrocoIT\OrderSplit\Ui\Component\Listing\Column\IsParent"
+                component="Magento_Ui/js/grid/columns/column"
+                sortOrder="25">
+            <settings>
+                <label translate="true">Split Type</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <filter>select</filter>
+                <options>
+                    <option name="0" xsi:type="array">
+                        <item name="value" xsi:type="number">0</item>
+                        <item name="label" xsi:type="string" translate="true">Regular/Child</item>
+                    </option>
+                    <option name="1" xsi:type="array">
+                        <item name="value" xsi:type="number">1</item>
+                        <item name="label" xsi:type="string" translate="true">Parent</item>
+                    </option>
+                </options>
+            </settings>
+        </column>
+
+        <column name="warehouse_code" sortOrder="26">
+            <settings>
+                <label translate="true">Warehouse</label>
+                <filter>text</filter>
+                <visible>true</visible>
+            </settings>
+        </column>
+
+        <column name="erp_sales_order_id" sortOrder="27">
+            <settings>
+                <label translate="true">ERPNext SO</label>
+                <filter>text</filter>
+                <visible>true</visible>
+            </settings>
+        </column>
+
+    </columns>
+</listing>

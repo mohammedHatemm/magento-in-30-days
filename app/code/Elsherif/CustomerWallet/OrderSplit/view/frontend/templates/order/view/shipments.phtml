@@ -1,0 +1,37 @@
+<?php
+/** @var \CrocoIT\OrderSplit\Block\Order\View\Shipments $block */
+?>
+
+<?php if ($block->isParentOrder()): ?>
+    <?php $shipments = $block->getShipmentsByWarehouse(); ?>
+    <?php if (!empty($shipments)): ?>
+        <div class="order-split-shipments">
+            <h3><?= __('Shipment Details') ?></h3>
+            <?php foreach ($shipments as $index => $shipment): ?>
+                <div class="shipment-group" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="shipment-header" style="font-weight: bold; margin-bottom: 5px;">
+                        📦 <?= __('Package %1 - %2', $index + 1, $shipment['warehouse']) ?>
+                    </div>
+                    <div class="shipment-status">
+                        <?= __('Status: %1', $shipment['status']) ?>
+                    </div>
+                    <?php if (!empty($shipment['tracks'])): ?>
+                        <?php foreach ($shipment['tracks'] as $track): ?>
+                            <div class="shipment-tracking" style="margin-top: 5px;">
+                                <?= __('Tracking (%1): %2', $track['carrier'], $track['number']) ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php elseif ($shipment['shipment_id']): ?>
+                        <div class="shipment-tracking" style="margin-top: 5px; color: #666;">
+                            <?= __('Shipped - No tracking number') ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="shipment-tracking" style="margin-top: 5px; color: #999;">
+                            <?= __('Preparing for shipment...') ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

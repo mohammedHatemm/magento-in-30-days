@@ -1,0 +1,122 @@
+<?php
+/** @var \CrocoIT\OrderSplit\Block\Adminhtml\Order\View\ChildOrders $block */
+?>
+
+<?php if ($block->isParentOrder()): ?>
+    <div class="admin__page-section order-split-info">
+        <div class="admin__page-section-title">
+            <span class="title"><?= __('Order Split - Child Orders') ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="order-split-notice" style="background: #e8f5e9; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
+                <strong><?= __('This is a Parent Order.') ?></strong>
+                <?= __('It has been split into %1 child orders by warehouse. Shipments and ERP sync are handled on child orders.', count($block->getChildOrders())) ?>
+            </div>
+
+            <table class="data-table admin__table-secondary">
+                <thead>
+                    <tr>
+                        <th><?= __('Child Order') ?></th>
+                        <th><?= __('Warehouse') ?></th>
+                        <th><?= __('ERPNext SO') ?></th>
+                        <th><?= __('Status') ?></th>
+                        <th><?= __('Grand Total') ?></th>
+                        <th><?= __('Items') ?></th>
+                        <th><?= __('Action') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($block->getChildOrders() as $child): ?>
+                        <tr>
+                            <td>
+                                <a href="<?= $block->getOrderViewUrl((int)$child->getEntityId()) ?>">
+                                    #<?= $child->getIncrementId() ?>
+                                </a>
+                            </td>
+                            <td><?= $child->getData('warehouse_code') ?? '-' ?></td>
+                            <td><?= $child->getData('erp_sales_order_id') ?? '-' ?></td>
+                            <td>
+                                <span class="grid-severity-<?= $child->getState() === 'canceled' ? 'critical' : ($child->getState() === 'complete' ? 'notice' : 'minor') ?>">
+                                    <?= ucfirst($child->getStatus()) ?>
+                                </span>
+                            </td>
+                            <td><?= $child->formatPrice($child->getGrandTotal()) ?></td>
+                            <td><?= count($child->getItems()) ?></td>
+                            <td>
+                                <a href="<?= $block->getOrderViewUrl((int)$child->getEntityId()) ?>"
+                                   class="action-default"><?= __('View') ?></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <?php $chain = $block->getAmendmentChain(); ?>
+            <?php if (!empty($chain)): ?>
+                <div style="margin-top: 15px;">
+                    <h4><?= __('Amendment History') ?></h4>
+                    <table class="data-table admin__table-secondary">
+                        <thead>
+                            <tr>
+                                <th><?= __('Date') ?></th>
+                                <th><?= __('Old ERPNext SO') ?></th>
+                                <th><?= __('New ERPNext SO') ?></th>
+                                <th><?= __('Old Child') ?></th>
+                                <th><?= __('New Child') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($chain as $entry): ?>
+                                <tr>
+                                    <td><?= $entry['timestamp'] ?? '-' ?></td>
+                                    <td><?= $entry['old_erp_so'] ?? '-' ?></td>
+                                    <td><?= $entry['new_erp_so'] ?? '-' ?></td>
+                                    <td>#<?= $entry['old_child_id'] ?? '-' ?></td>
+                                    <td>#<?= $entry['new_child_id'] ?? '-' ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+<?php elseif ($block->isChildOrder()): ?>
+    <?php $parent = $block->getParentOrder(); ?>
+    <?php if ($parent): ?>
+        <div class="admin__page-section order-split-info">
+            <div class="admin__page-section-title">
+                <span class="title"><?= __('Order Split Info') ?></span>
+            </div>
+            <div class="admin__page-section-content">
+                <div class="order-split-notice" style="background: #fff3e0; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
+                    <strong><?= __('This is a Child Order.') ?></strong>
+                    <?= __('Warehouse: %1 | Split %2 of %3',
+                        $block->getOrder()->getData('warehouse_code') ?? '-',
+                        $block->getOrder()->getData('split_index') ?? '-',
+                        $block->getOrder()->getData('total_splits') ?? '-'
+                    ) ?>
+                </div>
+                <table class="data-table admin__table-secondary">
+                    <tr>
+                        <td><strong><?= __('Parent Order') ?></strong></td>
+                        <td>
+                            <a href="<?= $block->getOrderViewUrl((int)$parent->getEntityId()) ?>">
+                                #<?= $parent->getIncrementId() ?>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong><?= __('ERPNext SO') ?></strong></td>
+                        <td><?= $block->getOrder()->getData('erp_sales_order_id') ?? 'Not synced yet' ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong><?= __('Warehouse') ?></strong></td>
+                        <td><?= $block->getOrder()->getData('warehouse_code') ?? '-' ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

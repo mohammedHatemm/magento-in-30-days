@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/di.xsd">
+
+    <!-- Interface preferences -->
+    <preference for="CrocoIT\OrderSplit\Api\WebhookInterface"
+                type="CrocoIT\OrderSplit\Model\WebhookProcessor"/>
+
+    <!-- Logger for OrderSplit -->
+    <virtualType name="CrocoIT\OrderSplit\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/order_split.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CrocoIT\OrderSplit\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">CrocoIT\OrderSplit\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Inject custom logger into models -->
+    <type name="CrocoIT\OrderSplit\Model\OrderSplitter">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\WarehouseResolver">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\ChildOrderCreator">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\ParentOrderManager">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\OrderStatusAggregator">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Observer\SplitOrderAfterPlace">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+            <argument name="erpConfig" xsi:type="object">CrocoIT\ErpNextIntegration\Model\Config</argument>
+            <argument name="publisher" xsi:type="object">CrocoIT\ErpNextIntegration\Model\Queue\Publisher</argument>
+            <argument name="orderMapper" xsi:type="object">CrocoIT\ErpNextIntegration\Model\Mapper\OrderDataMapper</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Observer\UpdateParentStatusObserver">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\AmendmentHandler">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\RefundCalculator">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Model\Service\DeliveryNoteService">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Controller\Webhook\SalesOrderAmendment">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Controller\Webhook\SalesOrderCancel">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="CrocoIT\OrderSplit\Controller\Webhook\DeliveryNote">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Plugin: Skip ERP sync for parent orders -->
+    <type name="CrocoIT\ErpNextIntegration\Observer\OrderPlaceAfter">
+        <plugin name="crocoit_ordersplit_sync_only_children"
+                type="CrocoIT\OrderSplit\Plugin\Checkout\SyncOnlyChildrenPlugin"
+                sortOrder="10"/>
+    </type>
+    <type name="CrocoIT\OrderSplit\Plugin\Checkout\SyncOnlyChildrenPlugin">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Plugins -->
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="crocoit_ordersplit_order_repository"
+                type="CrocoIT\OrderSplit\Plugin\Order\OrderRepositoryPlugin"/>
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="crocoit_ordersplit_order_grid"
+                type="CrocoIT\OrderSplit\Plugin\Sales\OrderGridPlugin"/>
+    </type>
+
+    <!-- ReservationCompensator logger -->
+    <type name="CrocoIT\OrderSplit\Model\ReservationCompensator">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Plugin: Skip reservations for child orders during split -->
+    <type name="Magento\InventorySalesApi\Api\PlaceReservationsForSalesEventInterface">
+        <plugin name="crocoit_ordersplit_skip_child_reservations"
+                type="CrocoIT\OrderSplit\Plugin\Inventory\SkipChildOrderReservationsPlugin"
+                sortOrder="1"/>
+    </type>
+    <type name="CrocoIT\OrderSplit\Plugin\Inventory\SkipChildOrderReservationsPlugin">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Plugin: Set shipment source from order's warehouse_code -->
+    <type name="Magento\Sales\Api\ShipmentRepositoryInterface">
+        <plugin name="crocoit_ordersplit_set_shipment_source"
+                type="CrocoIT\OrderSplit\Plugin\Shipping\SetShipmentSourceFromOrderPlugin"
+                sortOrder="10"/>
+    </type>
+    <type name="CrocoIT\OrderSplit\Plugin\Shipping\SetShipmentSourceFromOrderPlugin">
+        <arguments>
+            <argument name="logger" xsi:type="object">CrocoIT\OrderSplit\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Plugin: Hide child orders from GraphQL customerOrders query (PWA) -->
+    <type name="Magento\SalesGraphQl\Model\Resolver\CustomerOrders">
+        <plugin name="crocoit_ordersplit_hide_child_orders_graphql"
+                type="CrocoIT\OrderSplit\Plugin\GraphQl\HideChildOrdersGraphQlPlugin"
+                sortOrder="100"/>
+    </type>
+
+</config>

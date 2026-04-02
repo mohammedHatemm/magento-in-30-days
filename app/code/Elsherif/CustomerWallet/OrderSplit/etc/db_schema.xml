@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Add split columns + indexes to sales_order table -->
+    <table name="sales_order" resource="sales" comment="Sales Order">
+        <column xsi:type="int" name="parent_order_id" unsigned="true" nullable="true"
+                comment="Parent Order Entity ID"/>
+        <column xsi:type="smallint" name="is_parent" unsigned="true" nullable="false" default="0"
+                comment="Is Parent Order (1=yes, 0=no)"/>
+        <column xsi:type="text" name="child_order_ids" nullable="true"
+                comment="Child Order Entity IDs (JSON array)"/>
+        <column xsi:type="varchar" name="warehouse_code" length="50" nullable="true"
+                comment="Inventory Source/Warehouse Code"/>
+        <column xsi:type="varchar" name="erp_sales_order_id" length="50" nullable="true"
+                comment="ERPNext Sales Order ID"/>
+        <column xsi:type="varchar" name="erp_sales_order_name" length="100" nullable="true"
+                comment="ERPNext Sales Order Name"/>
+        <column xsi:type="int" name="split_index" unsigned="true" nullable="true"
+                comment="Split Index (1, 2, 3...)"/>
+        <column xsi:type="int" name="total_splits" unsigned="true" nullable="true"
+                comment="Total Number of Splits"/>
+        <column xsi:type="text" name="amendment_chain" nullable="true"
+                comment="Amendment History (JSON)"/>
+        <column xsi:type="int" name="amended_from_child_id" unsigned="true" nullable="true"
+                comment="Amended From Child Order Entity ID"/>
+
+        <index referenceId="SALES_ORDER_PARENT_ORDER_ID" indexType="btree">
+            <column name="parent_order_id"/>
+        </index>
+        <index referenceId="SALES_ORDER_IS_PARENT" indexType="btree">
+            <column name="is_parent"/>
+        </index>
+        <index referenceId="SALES_ORDER_ERP_SALES_ORDER_ID" indexType="btree">
+            <column name="erp_sales_order_id"/>
+        </index>
+        <index referenceId="SALES_ORDER_WAREHOUSE_CODE" indexType="btree">
+            <column name="warehouse_code"/>
+        </index>
+    </table>
+
+    <!-- Add split columns to sales_order_grid for admin display -->
+    <table name="sales_order_grid" resource="sales" comment="Sales Order Grid">
+        <column xsi:type="int" name="parent_order_id" unsigned="true" nullable="true"
+                comment="Parent Order Entity ID"/>
+        <column xsi:type="smallint" name="is_parent" unsigned="true" nullable="false" default="0"
+                comment="Is Parent Order"/>
+        <column xsi:type="varchar" name="warehouse_code" length="50" nullable="true"
+                comment="Warehouse Code"/>
+        <column xsi:type="varchar" name="erp_sales_order_id" length="50" nullable="true"
+                comment="ERPNext Sales Order ID"/>
+    </table>
+
+</schema>

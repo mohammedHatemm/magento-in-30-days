@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <!-- Split order after checkout (runs FIRST before ERP sync) -->
+    <event name="checkout_submit_all_after">
+        <observer name="crocoit_ordersplit_split_order"
+                  instance="CrocoIT\OrderSplit\Observer\SplitOrderAfterPlace"/>
+    </event>
+
+    <!-- Update parent status when child order status changes -->
+    <event name="sales_order_save_after">
+        <observer name="crocoit_ordersplit_update_parent_status"
+                  instance="CrocoIT\OrderSplit\Observer\UpdateParentStatusObserver"/>
+    </event>
+
+    <!-- Prevent shipment on parent orders -->
+    <event name="sales_order_shipment_save_before">
+        <observer name="crocoit_ordersplit_prevent_parent_shipment"
+                  instance="CrocoIT\OrderSplit\Observer\PreventParentShipment"/>
+    </event>
+
+</config>
